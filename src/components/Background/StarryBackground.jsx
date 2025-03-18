@@ -58,13 +58,6 @@ const StarryBackground = () => {
       window.removeEventListener('touchmove', handleTouchMove);
     };
   }, []);
-
-  return (
-    <div className="starry-background">
-      <h1 className="title">Planetarium</h1>
-      <p className="description">Welcome to the Planetarium</p>
-    </div>
-  );
 };
 
 export default StarryBackground;
