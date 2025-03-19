@@ -5,8 +5,8 @@
                 0 0 100px 30px rgba(100, 150, 255, 0.3);
     text-align: center;
     padding: 20px;
-    position: relative; /* Позволява добавянето на допълнителни елементи */
-    overflow: hidden;
+    position: relative; 
+    overflow: hidden; 
 }
 .nav-container {
     display: flex;
