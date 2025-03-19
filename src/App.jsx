@@ -1,28 +1,24 @@
+import React from "react";
 
-import {Routes, Route, } from 'react-router';
-
-
+import './App.css';
 import StarryBackground from "./components/Background/StarryBackground";
 import Header from "./components/Header/header";
-import Home from "./pages/Home/home";
-import About from './pages/About/about';
-import Contacts from './pages/Contacts/contacts';
+import AppRoutes from "./routes/AppRoutes"; // Импортираме компонентa с маршрутите
+import { AuthProvider } from "./contexts/AuthContext";
+
+
 
 function App() {
-
-  
-
   return (
+    <AuthProvider>
     <div className="App">
-      <StarryBackground/>
-      <Header/>
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/about" element={<About/>} />
-        <Route path="/contacts" element={<Contacts/>} />
-        <Route path="/planets" element={<h1>Planets</h1>} />
-      </Routes>
+      
+        <StarryBackground />
+        <Header />
+        <AppRoutes /> {/* Използваме дефинираните маршрути */}
+      
     </div>
+    </AuthProvider>
   );
 }
 
