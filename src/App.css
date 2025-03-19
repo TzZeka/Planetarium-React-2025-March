@@ -1,1 +1,83 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+body {
+  font-family: 'Orbitron', sans-serif;
+}
+
+.auth-form {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #1b1d29, #272a40); /* Фон като дълбок космос */
+    color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); /* Неоново сияние */
+    font-family: 'Orbitron', sans-serif; /* Футуристичен шрифт */
+  }
+  
+  .auth-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #00d4ff; /* Синьо-неонов акцент */
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+  }
+  
+  .auth-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #bbd4ff; /* Лек синьо-бял оттенък */
+  }
+  
+  .auth-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #00d4ff; /* Неонов кант */
+    border-radius: 6px;
+    font-size: 1rem;
+    background: rgba(27, 29, 41, 0.9); /* Полупрозрачен фон */
+    color: #ffffff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .auth-form input:focus {
+    border-color: #00ffab; /* Зелено-неоново при фокус */
+    box-shadow: 0 0 10px #00ffab;
+    outline: none;
+  }
+  
+  .auth-form button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #00d4ff, #00ffab); /* Неонова градиента */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+  }
+  
+  .auth-form button:hover {
+    transform: scale(1.05); /* Лек zoom при задържане */
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+  }
+  
+  .auth-form a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #00d4ff;
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+  }
+  
+  .auth-form a:hover {
+    color: #00ffab; /* Променя се към зелено-неоново */
+    text-shadow: 0 0 10px rgba(0, 255, 171, 0.8);
+  }
+  
