@@ -1,5 +1,5 @@
 
-import Globe from "../../pages/Home/RotatingGlobe";
+import Globe from "./RotatingGlobe";
 
 const Home = () => {
     return (
