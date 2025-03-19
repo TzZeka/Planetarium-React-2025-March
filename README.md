@@ -57,38 +57,6 @@ The project uses the following key technologies and libraries:
 - Animated planets and stars with realistic lighting effects.
 
 
-### **Project Structure** 
-The project structure is as follows for now:
-src/
-├── components/
-│   ├── Auth/
-│   │   ├── LoginForm.jsx
-│   │   ├── RegisterForm.jsx
-│   ├── CreateEditDelete/
-│   │   ├── Create.jsx
-│   │   ├── Edit.jsx
-│   │   ├── Delete.jsx
-│   ├── Background/
-│   │   ├── StarryBackground.jsx
-│   ├── Favourites/
-│   │   ├── Favourites.jsx
-│   ├── Header/
-│       ├── Header.jsx
-├── contexts/
-│   ├── AuthContext.js
-├── pages/
-│   ├── Home/
-│   │   ├── Home.jsx
-│   ├── About/
-│   │   ├── About.jsx
-│   ├── Contacts/
-│       ├── Contacts.jsx
-├── routes/
-│   ├── AppRoutes.jsx
-│   ├── ProtectedRoute.jsx
-├── App.css
-├── App.jsx
-
 ### **Future Features**
 
 1. Like Functionality: 
