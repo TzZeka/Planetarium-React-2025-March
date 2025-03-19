@@ -1,10 +1,14 @@
-import './home.css'; 
+import React from "react";
+import Globe from "./rotatingGlobe";
 
-export default function Home() {
-  return (
-    <div className="starry-background">
-        <h1 className="title">Planetarium</h1>
-        <p className="description">Welcome to the Planetarium</p>
-    </div>
-  );
-}
+const Home = () => {
+    return (
+        <div>
+            <h1 style={{ textAlign: "center", color: "white", marginTop: "20px" }}>
+                Welcome to Planetarium
+            </h1>
+            <Globe />
+        </div>
+    );
+};
+export default Home;
