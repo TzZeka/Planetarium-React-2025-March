@@ -1,5 +1,5 @@
-import React from "react";
-import Globe from "./rotatingGlobe";
+
+import Globe from "../../pages/Home/RotatingGlobe";
 
 const Home = () => {
     return (
