@@ -1,0 +1,97 @@
+/* Контейнер за профилната страница */
+.profile-container {
+  display: flex;
+  height: 100vh; /* Запълва целия екран */
+  background: #1b1d29; /* Тъмен фон */
+  color: #ffffff;
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Ляв панел */
+.profile-sidebar {
+  width: 300px; /* Ширината на панела */
+  background: #272a40; /* Космически панел */
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.profile-sidebar h2 {
+  font-size: 1.5rem;
+  color: #00d4ff;
+}
+
+.profile-sidebar p {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.logout-button {
+  padding: 10px 15px;
+  background: #ff4f4f; /* Червен бутон за изход */
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.logout-button:hover {
+  background: #ff6666;
+}
+
+/* Дясна част */
+.profile-main {
+  flex: 1; /* Запълва останалото пространство */
+  padding: 20px;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-header h1 {
+  font-size: 2rem;
+  color: #00ffff;
+}
+
+.create-button {
+  padding: 10px 15px;
+  background: #00d4ff; /* Син бутон */
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.create-button:hover {
+  background: #00ffff;
+}
+
+/* Секция за харесаните планети */
+.favourites-section {
+  margin-top: 20px;
+}
+
+.favourites-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #00d4ff;
+}
+
+.favourites-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.favourites-section li {
+  background: #2d3748; /* Тъмносин фон */
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
