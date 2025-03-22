@@ -1,15 +1,14 @@
-import { useNavigate } from "react-router";
+import { Navigate } from "react-router"; // За пренасочване
+import { useAuth } from "../contexts/AuthContext"; // Импорт на useAuth
 
 const ProtectedRoute = ({ children }) => {
-  const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user } = useAuth(); // Проверка на логнатия потребител
 
   if (!user) {
-    navigate("/login");
-    return null;
+    return Navigate ("/login"); // Пренасочване към логин ако няма потребител
   }
 
-  return children;
+  return children; // Рендиране на защитеното съдържание
 };
 
 export default ProtectedRoute;

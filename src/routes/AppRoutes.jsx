@@ -1,16 +1,18 @@
 import React from "react";
-import { Routes, Route } from "react-router"; // Използваме Routes и Route от react-router
+import { Routes, Route } from "react-router"; 
 import Home from "../pages/Home/home";
 import About from "../pages/About/about";
 import Contacts from "../pages/Contacts/contacts";
 
-import Create from "../components/CreateEditDelete/Create";
-import Edit from "../components/CreateEditDelete/Edit";
-import Delete from "../components/CreateEditDelete/Delete";
+import Create from "../components/CRUD/Create";
+import Edit from "../components/CRUD/Edit";
+
 import Favourites from "../components/Favourites/Favourites";
 import LoginForm from "../components/Auth/LoginForm";
 import RegisterForm from "../components/Auth/RegisterForm";
 import ProtectedRoute from "./ProtectedRoute";
+import ProfilePage from "../components/Profile/ProfilePage";
+import Planets from "../pages/Planets/planets";
 
 const AppRoutes = () => {
   return (
@@ -21,8 +23,18 @@ const AppRoutes = () => {
       <Route path="/contacts" element={<Contacts />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/register" element={<RegisterForm />} />
+      <Route path="/favourites" element={<Favourites />} />
+      <Route path="/planets" element={<Planets />} />
 
       {/* Защитени маршрути */}
+      <Route
+        path="/profile"
+        element={ 
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/create"
         element={
@@ -39,11 +51,12 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+
       <Route
-        path="/delete/:itemId"
+        path="/edit/:itemId"
         element={
           <ProtectedRoute>
-            <Delete />
+            <Edit />
           </ProtectedRoute>
         }
       />
