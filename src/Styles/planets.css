@@ -1,0 +1,104 @@
+/* Фон на страницата */
+.planets-page {
+    background: radial-gradient(circle at center, #1b2735, #090a0f);
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    overflow: аuto;
+  }
+  
+  .planets-title {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    color: #00d4ff;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+  }
+  
+  /* Grid за планетите */
+  .planets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  /* Картите на планетите */
+  .planet-card {
+    background: linear-gradient(135deg, #1b1d29, #272a40);
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  
+  .planet-card h2 {
+    font-size: 1.5rem;
+    color: #00ffff;
+    text-shadow: 0 0 5px #00d4ff;
+  }
+  
+  .planet-card p {
+    margin: 5px 0;
+    color: #b0c4de;
+    font-size: 1rem;
+  }
+  
+  /* Hover ефект */
+  .planet-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
+  }
+  
+  /* Модал за планетите */
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #1b2735, #2d3748);
+    padding: 30px;
+    border-radius: 10px;
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    animation: appear 0.3s ease-in-out;
+  }
+  
+  .modal h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #00ffff;
+  }
+  
+  .modal button {
+    background: #ff4f4f;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .modal button:hover {
+    background: #ff6666;
+  }
+  
+  /* Анимация за появяване на модала */
+  @keyframes appear {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -60%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
