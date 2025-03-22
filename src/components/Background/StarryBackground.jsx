@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import "./StarryBackground.css";
+import "../../Styles/StarryBackground.css";
 
 const StarryBackground = () => {
     const starContainerRef = useRef(null); // Създаване на референция за контейнера
