@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router';
-import './Header.css';
+import '../../Styles/Header.css';
 
 const navigation = [
   { name: 'Home', path: '/' },
@@ -11,22 +11,34 @@ const navigation = [
 ];
 
 export default function Header() {
-  const { user, logout } = useAuth() || {}; // Fallback to empty object
+  const auth = useAuth(); 
+  const user = auth?.user; 
+  const logout = auth?.logout; 
 
   return (
     <header className="header">
       <nav className="nav-container">
-        <div className="logo-container">
-          <Link to="/" className="nav-link">Planetarium</Link>
+        {/* Логото вляво */}
+        <div className="logo">
+          <Link to="/" className="nav-link">PLANETARIUM</Link>
         </div>
-        <div className="desktop-nav-links">
+
+        {/* Линкове в центъра */}
+        <div className="center-nav-links">
           {navigation.map((item) => (
             <Link key={item.name} to={item.path} className="nav-link">
               {item.name}
             </Link>
           ))}
+        </div>
+
+        {/* Login и Register вдясно или функции за логнати потребители */}
+        <div className="right-nav-links">
           {user ? (
-            <button className="nav-button" onClick={logout}>Logout</button>
+            <>
+              <Link to="/profile" className="nav-link">Profile</Link>
+              <Link to="/create" className="nav-link">Add Planet</Link>
+            </>
           ) : (
             <>
               <Link to="/login" className="nav-link">Login</Link>
