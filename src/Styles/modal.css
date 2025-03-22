@@ -1,0 +1,45 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1b1d29; /* Тъмен sci-fi фон */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    text-align: center;
+    z-index: 1000;
+  }
+  
+  .modal p {
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  
+  .modal button {
+    margin: 0 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .modal button:first-child {
+    background: #00d4ff; /* Син бутон за "Да" */
+    color: #ffffff;
+  }
+  
+  .modal button:first-child:hover {
+    background: #00ffff; /* По-светъл синьо-зелен нюанс */
+  }
+  
+  .modal button:last-child {
+    background: #ff4f4f; /* Червен бутон за "Не" */
+    color: #ffffff;
+  }
+  
+  .modal button:last-child:hover {
+    background: #ff6666; /* По-светъл червен нюанс */
+  }
+  
