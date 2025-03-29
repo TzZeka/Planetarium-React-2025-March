@@ -5,19 +5,21 @@ import Header from "./components/Header/header";
 import AppRoutes from "./routes/AppRoutes"; 
 import { ToastContainer } from "react-toastify";
 import Footer from "./components/Footer/footer";
+import { AuthProvider } from "./contexts/AuthContext";
 
 
 
 function App() {
   return (
-       
-    <div className="App">
+     <AuthProvider> 
+        <div className="App">
           <ToastContainer/>
           <StarryBackground />
-          <Header /> 
+          <Header />
           <AppRoutes />
-          <Footer/>      
-    </div>
+          <Footer/>         
+        </div>
+    </AuthProvider> 
    
   );
 }
