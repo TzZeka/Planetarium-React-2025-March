@@ -4,24 +4,46 @@ import "../../Styles/About.css";
 const About = () => {
   return (
     <div className="about-container">
+    
+      <img
+        src="/images/LogoSoftwareUniversity.png"
+        alt="Software University Logo"
+        className="university-logo"
+      />
+
+      
+      <h1 className="about-title">About This Project</h1>
+
+     
+      <a href="/contacts" className="contact-button">
+        Contact Us &rarr;
+      </a>
+
+     
       <div className="about-content">
-        <h2 className="title">About this Project</h2>
-        <p className="description">
-          This project was developed as part of a student assignment at Software University SoftUni. The goal of the project is to demonstrate the practical application of web development skills, focusing on React.
-        </p>
-        <p className="description">
-          Created with dedication and a love for coding by <strong>Tsvetomir Genov</strong>.
-        </p>
-        <img
-            src="/images/LogoSoftwareUniversity.png"
-            alt="University Logo"
-            className="university-logo"
-        />
-        <div className="links">
-          <a href="/contacts" className="link">
-            Go to Contacts &rarr;
-          </a>
-        </div>
+        <article className="about-article">
+          <h3>Welcome</h3>
+          <p>
+            Welcome to a galactic adventure built on React.
+            This project, created as part of a student assignment at <strong>Software University</strong>,
+            showcases the creative potential of web development.
+          </p>
+        </article>
+
+        <article className="about-article">
+          <h3>Crafted by Tsvetomir Genov</h3>
+          <p>
+            Designed with dedication and precision by <strong>Tsvetomir Genov</strong>, this platform aims to inspire,
+            teach, and demonstrate the endless possibilities of modern web technologies.
+          </p>
+        </article>
+
+        <article className="about-article">
+          <h3>Mission Statement</h3>
+          <p>
+            Our mission is clear: merge creativity with technology to craft an experience that's out of this world!
+          </p>
+        </article>
       </div>
     </div>
   );
