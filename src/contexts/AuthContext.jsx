@@ -6,39 +6,39 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Добавяме състояние за зареждане
+  const [loading, setLoading] = useState(true);
 
-  // Функция за логин
+  const register = async (email, password) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      return userCredential; 
+    } catch (error) {
+      throw error;
+    }
+  };
   const login = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     setUser(userCredential.user);
   };
 
-  // Функция за регистрация
-  const register = async (email, password) => {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    setUser(userCredential.user);
-  };
-
-  // Функция за изход
   const logout = async () => {
     await signOut(auth);
     setUser(null);
   };
 
-  // Проверка за потребител при презареждане на страницата
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser); // Задаваме текущия потребител
-      setLoading(false); // Спираме зареждането
+      console.log("Current user:", currentUser);
+      setUser(currentUser || null);
+      setLoading(false);
     });
-
-    return () => unsubscribe(); // Спира слушането при излизане от компонента
+  
+    return () => unsubscribe();
   }, []);
 
   return (
     <AuthContext.Provider value={{ user, login, register, logout }}>
-      {!loading && children} {/* Показваме children само след зареждане */}
+       {!loading && children}
     </AuthContext.Provider>
   );
 };
