@@ -1,6 +1,7 @@
 body {
     margin: 0;
-    overflow: hidden;
+    overflow: auto;
+
   }
   .starry-background {
     position: fixed;
@@ -19,7 +20,7 @@ body {
     border-radius: 50%;
     opacity: 0.8;
     animation: twinkle 3s infinite alternate;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* Сияние около звездите */
+    box-shadow: 0 0 8px rgba(234, 227, 27, 0.8); /* Сияние около звездите */
 }
   
   @keyframes twinkle {
