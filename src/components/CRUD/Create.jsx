@@ -4,13 +4,14 @@ import { useAuth } from "../../contexts/AuthContext";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router";
 import "../../Styles/CreateEdit.css";
+import { toastError, toastInfo, toastSuccess } from "../../utils/toastNotifications";
 
 const Create = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [size, setSize] = useState("");
-  const [color, setColor] = useState("");
+  const [type, setType] = useState("");
   const [distance, setDistance] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
@@ -36,7 +37,7 @@ const Create = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (existingPlanets.includes(name.toLowerCase())) {
-      alert("This planet already exists.");
+      toastInfo("This planet already exists.");
       return;
     }
 
@@ -45,16 +46,16 @@ const Create = () => {
       const planetId = await createItem("planets", {
         name,
         size,
-        color,
+        type,
         distance,
         description,
         imageUrl,
         createdBy: user.uid,
       });
-      alert(`Planet created successfully! ID: ${planetId}`);
+      toastSuccess(`Planet created successfully! ID: ${planetId}`);
       navigate("/planets"); // Пренасочване към страницата с каталога
     } catch (error) {
-      alert(`Error creating planet: ${error.message}`);
+      toastError(`Error creating planet: ${error.message}`);
     }
   };
 
@@ -65,8 +66,8 @@ const Create = () => {
       <input value={name} onChange={(e) => setName(e.target.value)} required />
       <label>Size:</label>
       <input value={size} onChange={(e) => setSize(e.target.value)} required />
-      <label>Color:</label>
-      <input value={color} onChange={(e) => setColor(e.target.value)} required />
+      <label>Type:</label>
+      <input value={type} onChange={(e) => setType(e.target.value)} required />
       <label>Distance from Sun (million km):</label>
       <input
         type="number"
@@ -80,7 +81,7 @@ const Create = () => {
         onChange={(e) => setDescription(e.target.value)}
         required
       />
-      <label>Planet Image:</label>
+      <label>Planet Image:</label>  
       <input type="file" onChange={(e) => setImage(e.target.files[0])} required />
       <button type="submit">Create Planet</button>
     </form>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { updateItem } from "../../utils/api";
+import { toastError, toastSuccess } from './../../utils/toastNotifications';
 
 const Edit = ({ planet, onClose }) => {
   const [name, setName] = useState(planet.name);
@@ -10,10 +11,10 @@ const Edit = ({ planet, onClose }) => {
     e.preventDefault();
     try {
       await updateItem("planets", planet.id, { name, size, color });
-      alert("Planet updated successfully.");
+      toastSuccess("Planet updated successfully.");
       onClose();
     } catch (error) {
-      console.error("Error updating planet:", error.message);
+      toastError("Error updating planet:", error.message);
     }
   };
 
