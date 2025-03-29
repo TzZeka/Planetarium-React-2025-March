@@ -3,7 +3,8 @@ import './App.css';
 import StarryBackground from "./components/Background/StarryBackground";
 import Header from "./components/Header/header";
 import AppRoutes from "./routes/AppRoutes"; 
-import { AuthProvider } from "./contexts/AuthContext";
+import { ToastContainer } from "react-toastify";
+import Footer from "./components/Footer/footer";
 
 
 
@@ -11,12 +12,11 @@ function App() {
   return (
        
     <div className="App">
-      <StarryBackground />
-     
-       <AuthProvider>
-        <Header /> {/* Използваме компонента Header */}
-        <AppRoutes /> {/* Използваме дефинираните маршрути */}
-        </AuthProvider>
+          <ToastContainer/>
+          <StarryBackground />
+          <Header /> 
+          <AppRoutes />
+          <Footer/>      
     </div>
    
   );
