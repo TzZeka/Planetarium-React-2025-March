@@ -1,5 +1,5 @@
 
-import Globe from "./RotatingGlobe";
+import Globe from "./MainScene";
 
 const Home = () => {
     return (
