@@ -2,9 +2,8 @@ import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router";
-import { toastError, toastSuccess } from './../../utils/toastNotifications';
-
+import { useNavigate } from "react-router"; // Поправен импорт за navigate
+import { toastError, toastSuccess } from "../../utils/toastNotifications";
 
 const registerValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -19,25 +18,26 @@ const registerValidationSchema = Yup.object().shape({
 });
 
 const RegisterForm = () => {
-  const { register, user } = useAuth();
+  const { register, user } = useAuth(); // Извличаме потребителя от контекста
   const navigate = useNavigate();
 
-  if (user) {
-    navigate("/profile"); // Ако е логнат, пренасочи към профилната страница
-  }
-
+  // Пренасочване, ако потребителят е логнат
+  React.useEffect(() => {
+    if (user) {
+      navigate("/profile");
+    }
+  }, [user, navigate]); // Следим промените в `user`
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      await register(values.email, values.password);
+      await register(values.email, values.password); // Регистрацията НЕ логва
       toastSuccess("Registration successful! Please log in.");
-      navigate("/login"); // Пренасочване към страницата за логин
+      navigate("/login"); // Пренасочване към страницата за вход
     } catch (error) {
       toastError(`Registration failed: ${error.message}`);
     } finally {
       setSubmitting(false);
     }
   };
-
   return (
     <div>
       <Formik
@@ -63,15 +63,15 @@ const RegisterForm = () => {
             <button type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Registering..." : "Join the Mission"}
             </button>
+
             <p>
               Already have an account? <a href="/login">Login here</a>
             </p>
           </Form>
-           
         )}
       </Formik>
-     
     </div>
   );
 };
+
 export default RegisterForm;
