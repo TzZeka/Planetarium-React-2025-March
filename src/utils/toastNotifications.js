@@ -33,7 +33,7 @@ export const toastError = (message) => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    style: { backgroundColor: "#f8d7da", color: "#721c24" }, 
+    style: { backgroundColor: "rgba(0, 0, 0, 0.7)", color: "#721c24" }, 
   });
 };
 
