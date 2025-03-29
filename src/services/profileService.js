@@ -11,8 +11,8 @@ export const updateUserProfile = async (data) => {
   }
 
   try {
-    const userRef = doc(db, "users", auth.currentUser.uid); // Вземи референцията към потребителя
-    await updateDoc(userRef, data); // Актуализиране на документа
+    const userRef = doc(db, "users", auth.currentUser.uid); 
+    await updateDoc(userRef, data);
     console.log("Profile updated successfully!");
   } catch (error) {
     console.error("Failed to update profile:", error.message);
