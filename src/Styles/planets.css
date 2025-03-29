@@ -1,104 +1,135 @@
-/* Фон на страницата */
+
 .planets-page {
-    background: radial-gradient(circle at center, #1b2735, #090a0f);
-    color: white;
-    min-height: 100vh;
-    padding: 20px;
-    font-family: 'Orbitron', sans-serif;
-    text-align: center;
-    overflow: аuto;
-  }
-  
-  .planets-title {
-    font-size: 3rem;
-    margin-bottom: 30px;
-    color: #00d4ff;
-    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-  }
-  
-  /* Grid за планетите */
-  .planets-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-  }
-  
-  /* Картите на планетите */
-  .planet-card {
-    background: linear-gradient(135deg, #1b1d29, #272a40);
-    border: 2px solid rgba(0, 255, 255, 0.3);
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
-    padding: 20px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-  }
-  
-  .planet-card h2 {
-    font-size: 1.5rem;
-    color: #00ffff;
-    text-shadow: 0 0 5px #00d4ff;
-  }
-  
-  .planet-card p {
-    margin: 5px 0;
-    color: #b0c4de;
-    font-size: 1rem;
-  }
-  
-  /* Hover ефект */
-  .planet-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
-  }
-  
-  /* Модал за планетите */
-  .modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(135deg, #1b2735, #2d3748);
-    padding: 30px;
-    border-radius: 10px;
-    color: white;
-    z-index: 1000;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    animation: appear 0.3s ease-in-out;
-  }
-  
-  .modal h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #00ffff;
-  }
-  
-  .modal button {
-    background: #ff4f4f;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .modal button:hover {
-    background: #ff6666;
-  }
-  
-  /* Анимация за появяване на модала */
-  @keyframes appear {
-    from {
-      opacity: 0;
-      transform: translate(-50%, -60%);
-    }
-    to {
-      opacity: 1;
-      transform: translate(-50%, -50%);
-    }
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Orbitron', sans-serif;
+  color: #ffffff;
+  background-image: url('/public/images/planets-bgrd.jpg'); 
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center
+}
+
+
+.planets-title {
+  font-size: 2.5rem;
+  color: #00ffff;
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+
+.planets-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  gap: 40px; 
+  margin-bottom: 10em;
+}
+
+
+.planet-card {
+  width: 300px;
+  background: rgba(20, 20, 30, 0.8);
+  border: 1px solid #00ffff;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.planet-card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.7);
+}
+
+
+.planet-name {
+  font-size: 1.5rem;
+  color: #00ffff;
+  margin-bottom: 10px;
+}
+
+.planet-image {
+  width: 100%;
+  height: 50%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.planet-description {
+  font-size: 1rem;
+  color: #b0f7f7;
+  margin-bottom: 20px;
+}
+
+
+.planet-size {
+  font-size: 1.2rem;
+  color: #b0f7f7;
+}
+
+
+.planet-color {
+  font-size: 1.2rem;
+  color: #b0f7f7;
+}
+
+
+.planet-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #00ffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+
+.planet-size, .planet-color {
+  font-size: 1rem;
+  color: #b0f7f7;
+}
+
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  width: 500px;
+  text-align: center;
+  z-index: 1000;
+}
+
+button {
+  margin: 20px;
+  padding: 10px 20px;
+  background: #00ffcc;
+  font-size: 1rem;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.4s ease;
+}
+
+button:hover {
+  background: #00ffff;
+  transform: scale(1.05);
+}

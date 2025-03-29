@@ -1,51 +1,109 @@
+/* Основен контейнер */
 .about-container {
-    position: relative;
-    padding: 50px 20px;
-    background-color: #1a202c;
-    color: #ffffff;
-    text-align: center;
-  }
+  position: relative;
+  min-height: 100vh;
+  padding: 20px;
+  background: url('/images/cosmic-bgrd.jpg') center/cover no-repeat; 
+  color: white;
+  overflow: hidden; 
+}
+
+
+.university-logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 120px;
+  height: auto;
+}
+
+
+.about-title {
+  position: absolute;
+  top: 10px;
+  left: 12em;
+  font-size: 2.5rem;
+  color: #00ffff;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.contact-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 255, 255, 0.3);
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.contact-button:hover {
+  background: rgba(0, 255, 255, 0.6);
+  transform: scale(1.1);
+}
+
+
+.about-content {
+  margin-top: 120px; 
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.about-article {
+  background: rgba(0, 0, 0, 0.6); 
+  border: 1px solid rgba(0, 255, 255, 0.3); 
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+  opacity: 0; 
   
-  .university-logo {
-    max-width: 150px;
-    margin: 0 auto 20px;
-    display: block;
-  }
+  transform: translateX(100%); 
+  animation: slide-in 1.5s ease-out forwards; 
+}
+.about-article:hover {
   
-  .about-content {
-    max-width: 600px;
-    margin: 0 auto;
+  transition: 0.2s;
+  box-shadow: 0 5px 20px rgba(0, 255, 255, 0.5);
+
+}
+
+.about-article h3 {
+  color: #00ffff;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+}
+
+/* Анимация за движение от дясно наляво */
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
   }
-  
-  .title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
-  
-  .description {
-    font-size: 1.2rem;
-    color: #cbd5e0;
-    margin-bottom: 20px;
-  }
-  
-  .links {
-    margin-top: 30px;
-  }
-  
-  .link {
-    font-size: 1rem;
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
-    border: 2px solid #ffffff;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .link:hover {
-    background-color: #ffffff;
-    color: #1a202c;
-  }
-  
+}
+
+/* Добавяне на анимационни закъснения за артикълите */
+.about-article:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.about-article:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.about-article:nth-child(3) {
+  animation-delay: 0.9s;
+}
