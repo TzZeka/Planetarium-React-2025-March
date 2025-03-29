@@ -2,6 +2,8 @@ import React from "react";
 import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router';
 import '../../Styles/Header.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const navigation = [
   { name: 'Home', path: '/' },
@@ -13,17 +15,16 @@ const navigation = [
 export default function Header() {
   const auth = useAuth(); 
   const user = auth?.user; 
-  const logout = auth?.logout; 
 
   return (
     <header className="header">
       <nav className="nav-container">
-        {/* Логото вляво */}
+        
         <div className="logo">
           <Link to="/" className="nav-link">PLANETARIUM</Link>
         </div>
 
-        {/* Линкове в центъра */}
+        {/* Навигация в центъра */}	
         <div className="center-nav-links">
           {navigation.map((item) => (
             <Link key={item.name} to={item.path} className="nav-link">
@@ -36,6 +37,9 @@ export default function Header() {
         <div className="right-nav-links">
           {user ? (
             <>
+              <Link to="/favourites" className="nav-link">
+                <FontAwesomeIcon icon={faHeart} className="heart-icon" />
+              </Link>
               <Link to="/profile" className="nav-link">Profile</Link>
               <Link to="/create" className="nav-link">Add Planet</Link>
             </>
