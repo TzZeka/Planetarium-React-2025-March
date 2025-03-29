@@ -14,6 +14,7 @@ import ProfilePage from "../components/Profile/ProfilePage";
 import Planets from "../pages/Planets/planets";
 import FavouritesList from './../components/Favourites/FavouritesList';
 import NotFound404 from "../components/NotFound404/NotFound";
+import PublicRoute from "./PublicRoute";
 
 const AppRoutes = () => {
   return (
@@ -22,10 +23,14 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/contacts" element={<Contacts />} />
-      <Route path="/login" element={<LoginForm />} />
-      <Route path="/register" element={<RegisterForm />} />
       <Route path="/planets" element={<Planets />} />
       <Route path="*" element={<NotFound404/>} />
+
+
+      <Route element={<PublicRoute />}>
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RegisterForm />} />
+      </Route>
 
       {/* Защитени маршрути */}
       <Route
