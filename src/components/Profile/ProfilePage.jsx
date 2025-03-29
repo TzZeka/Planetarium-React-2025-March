@@ -1,6 +1,5 @@
-import { ToastContainer } from "react-toastify";
-import { toastError,toastSuccess } from "../../utils/toastNotifications";
 
+import { toastError, toastSuccess } from "../../utils/toastNotifications";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
@@ -12,34 +11,40 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import "../../Styles/ProfilePage.css";
 
 const ProfilePage = () => {
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuth(); 
   const [username, setUsername] = useState("");
   const [lastLogin, setLastLogin] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); 
 
   useEffect(() => {
     if (user) {
-      // Автоматично задаване на username от email
-      const emailPrefix = user.email.split("@")[0];
+      // Ако user съществува, извличаме потребителското име от email-а
+      const emailPrefix = user.email ? user.email.split("@")[0] : "Unknown";
       setUsername(emailPrefix);
 
-
-      const loginTime = new Date(user.metadata.lastSignInTime).toLocaleString();
+      
+      const loginTime = user.metadata?.lastSignInTime
+        ? new Date(user.metadata.lastSignInTime).toLocaleString()
+        : "Unknown";
       setLastLogin(loginTime);
+    } else {
+      // Ако няма логнат потребител
+      setUsername("Guest");
+      setLastLogin("N/A");
     }
-  }
-  , [user]);
+  }, [user]);
+
   const handleLogout = async () => {
     try {
       await logout();
-        toastSuccess("You have logged out successfully!");
+      toastSuccess("You have logged out successfully!");
     } catch (error) {
-        toastError(`Failed to log out: ${error.message}`);
+      toastError(`Failed to log out: ${error.message}`);
     }
   };
 
   const handleProfileDetails = () => {
-    setIsModalOpen(true); // Отваряне на модала
+    setIsModalOpen(true);
   };
 
   return (
@@ -57,10 +62,14 @@ const ProfilePage = () => {
 
         {/* Потребителска информация */}
         <h2 className="profile-username">{username}</h2>
-        <p><strong>Email:</strong> {user?.email || "Unknown"}</p>
-        <p><strong>Last Login:</strong> {lastLogin}</p>
+        <p>
+          <strong>Email:</strong> {user?.email || "Unknown"}
+        </p>
+        <p>
+          <strong>Last Login:</strong> {lastLogin}
+        </p>
 
-        {/* Линк за любими */}
+        {/* Линк към любими */}
         <Link to="/favourites" className="nav-link favorites-link">
           <FontAwesomeIcon icon={faHeart} className="heart-icon" /> Favorites
         </Link>
@@ -82,7 +91,8 @@ const ProfilePage = () => {
           <h1>Welcome, {username}</h1>
         </div>
       </div>
-      {/* Модал за профилни детайли */}
+
+      {/* Модал за детайли на профила */}
       {isModalOpen && (
         <ProfileDetailsModal
           username={username}
