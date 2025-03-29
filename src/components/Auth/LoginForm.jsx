@@ -1,8 +1,13 @@
-import React from "react";
+import { toastError,toastSuccess } from "../../utils/toastNotifications";
+
+import React, { useEffect } from "react";
+
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+
 import { useNavigate } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
+
 
 
 const loginValidationSchema = Yup.object().shape({
@@ -18,17 +23,20 @@ const LoginForm = () => {
   const { login, user } = useAuth();
   const navigate = useNavigate();
 
-  if (user) {
-    navigate("/profile"); // Ако е логнат, пренасочи към профилната страница
-  }
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       await login(values.email, values.password);
-      alert("Welcome back, explorer of planets!");
-      navigate("/profile"); // Пренасочване към профилната страница
+      toastSuccess("Welcome back, explorer of planets!");
+      navigate("/profile"); // Пренасочване към профилната страница след успешно логване
     } catch (error) {
-      alert(`Login failed: ${error.message}`);
+      toastError(`Login failed: ${error.message}`);
     } finally {
       setSubmitting(false);
     }
@@ -43,7 +51,7 @@ const LoginForm = () => {
       >
         {({ isSubmitting }) => (
           <Form className="auth-form">
-            <h2>Login to Spaceport</h2>
+            <h2>Sign in to Spaceport</h2>
             <label>Cosmic Email:</label>
             <Field type="email" name="email" autoComplete="email" />
             <ErrorMessage name="email" component="div" className="error-message" />
@@ -64,4 +72,5 @@ const LoginForm = () => {
     </div>
   );
 };
+
 export default LoginForm;

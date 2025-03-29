@@ -3,6 +3,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router";
+import { toastError, toastSuccess } from './../../utils/toastNotifications';
 
 
 const registerValidationSchema = Yup.object().shape({
@@ -28,10 +29,10 @@ const RegisterForm = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       await register(values.email, values.password);
-      alert("Registration successful! Please log in.");
+      toastSuccess("Registration successful! Please log in.");
       navigate("/login"); // Пренасочване към страницата за логин
     } catch (error) {
-      alert(`Registration failed: ${error.message}`);
+      toastError(`Registration failed: ${error.message}`);
     } finally {
       setSubmitting(false);
     }
