@@ -7,12 +7,13 @@ import Contacts from "../pages/Contacts/contacts";
 import Create from "../components/CRUD/Create";
 import Edit from "../components/CRUD/Edit";
 
-import Favourites from "../components/Favourites/Favourites";
 import LoginForm from "../components/Auth/LoginForm";
 import RegisterForm from "../components/Auth/RegisterForm";
 import ProtectedRoute from "./ProtectedRoute";
 import ProfilePage from "../components/Profile/ProfilePage";
 import Planets from "../pages/Planets/planets";
+import FavouritesList from './../components/Favourites/FavouritesList';
+import NotFound404 from "../components/NotFound404/NotFound";
 
 const AppRoutes = () => {
   return (
@@ -23,8 +24,8 @@ const AppRoutes = () => {
       <Route path="/contacts" element={<Contacts />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/register" element={<RegisterForm />} />
-      <Route path="/favourites" element={<Favourites />} />
       <Route path="/planets" element={<Planets />} />
+      <Route path="*" element={<NotFound404/>} />
 
       {/* Защитени маршрути */}
       <Route
@@ -51,20 +52,11 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
-
-      <Route
-        path="/edit/:itemId"
-        element={
-          <ProtectedRoute>
-            <Edit />
-          </ProtectedRoute>
-        }
-      />
       <Route
         path="/favourites"
         element={
           <ProtectedRoute>
-            <Favourites />
+            <FavouritesList />
           </ProtectedRoute>
         }
       />
