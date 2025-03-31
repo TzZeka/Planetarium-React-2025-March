@@ -1,63 +1,54 @@
 import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { deleteItem, updateItem } from "../utils/api"; // Импорт на функцията за актуализация
+import { deleteItem, updateItem } from "../utils/api";
 import { addToFavourites } from "../components/Favourites/favouritesService";
 import "../Styles/Planets.css";
+import { toastError, toastInfo, toastSuccess } from './../utils/toastNotifications';
 
-const PlanetModal = ({ planet, onClose, onDelete }) => {
+const PlanetModal = ({ planet, onClose }) => {
   const { user } = useAuth();
   const isAuthor = user && user.uid === planet.createdBy;
 
-  const [isEditing, setIsEditing] = useState(false); 
-  const [editedPlanet, setEditedPlanet] = useState({ ...planet }); 
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedPlanet, setEditedPlanet] = useState({ ...planet });
 
   const handleDelete = async () => {
     try {
       await deleteItem("planets", planet.id);
-      alert("Planet deleted successfully.");
-  
-      
-      setPlanets((prevPlanets) => prevPlanets.filter((p) => p.id !== planet.id));
-  
-      onClose(); 
+      toastSuccess("Planet deleted successfully.");
+      onClose();
     } catch (error) {
-      console.error("Error deleting planet:", error.message);
+      toastError("Error deleting planet:", error.message);
     }
   };
 
   const handleAddToFavourites = async () => {
     try {
       await addToFavourites(planet.id);
-      alert(`${planet.name} added to favorites.`);
+      toastInfo(`${planet.name} added to favorites.`);
     } catch (error) {
-      console.error("Error adding to favorites:", error.message);
+      toastError("Error adding to favorites:", error.message);
     }
   };
 
-  
-    const handleEdit = async (updatedPlanet) => {
-      try {
-        await updateItem("planets", planet.id, updatedPlanet);
-        alert("Planet updated successfully!");
-    
-      
-        setPlanets((prevPlanets) =>
-          prevPlanets.map((p) => (p.id === planet.id ? updatedPlanet : p))
-        );
-    
-        onClose(); 
-      } catch (error) {
-        console.error("Error updating planet:", error.message);
-      }
-    };
-    
+  const handleEdit = async (updatedPlanet) => {
+    if (!updatedPlanet || Object.keys(updatedPlanet).length === 0) {
+      toastInfo("Please fill out all required fields.");
+      return;
+    }
+
+    try {
+      await updateItem("planets", planet.id, updatedPlanet);
+      toastSuccess("Planet updated successfully!");
+      onClose();
+    } catch (error) {
+      toastError("Error updating planet:", error.message);
+    }
+  };
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
-      <div
-        className="modal"
-        onClick={(e) => e.stopPropagation()} 
-      >
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
         <button className="close-button" onClick={onClose}>
           &times;
         </button>
@@ -66,14 +57,14 @@ const PlanetModal = ({ planet, onClose, onDelete }) => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              handleEdit();
+              handleEdit(editedPlanet);
             }}
           >
             <label>
               Name:
               <input
                 type="text"
-                value={editedPlanet.name}
+                value={editedPlanet.name || ""}
                 onChange={(e) =>
                   setEditedPlanet((prev) => ({ ...prev, name: e.target.value }))
                 }
@@ -83,7 +74,7 @@ const PlanetModal = ({ planet, onClose, onDelete }) => {
               Size:
               <input
                 type="text"
-                value={editedPlanet.size}
+                value={editedPlanet.size || ""}
                 onChange={(e) =>
                   setEditedPlanet((prev) => ({ ...prev, size: e.target.value }))
                 }
@@ -93,7 +84,7 @@ const PlanetModal = ({ planet, onClose, onDelete }) => {
               Type:
               <input
                 type="text"
-                value={editedPlanet.type}
+                value={editedPlanet.type || ""}
                 onChange={(e) =>
                   setEditedPlanet((prev) => ({ ...prev, type: e.target.value }))
                 }
@@ -102,7 +93,7 @@ const PlanetModal = ({ planet, onClose, onDelete }) => {
             <label>
               Description:
               <textarea
-                value={editedPlanet.description}
+                value={editedPlanet.description || ""}
                 onChange={(e) =>
                   setEditedPlanet((prev) => ({
                     ...prev,
@@ -115,7 +106,7 @@ const PlanetModal = ({ planet, onClose, onDelete }) => {
               Distance from Sun:
               <input
                 type="text"
-                value={editedPlanet.distance}
+                value={editedPlanet.distance || ""}
                 onChange={(e) =>
                   setEditedPlanet((prev) => ({
                     ...prev,
@@ -148,7 +139,7 @@ const PlanetModal = ({ planet, onClose, onDelete }) => {
               <>
                 <button
                   className="edit-button"
-                  onClick={() => setIsEditing(true)} // Активиране на режима за редактиране
+                  onClick={() => setIsEditing(true)}
                 >
                   Edit
                 </button>
@@ -159,7 +150,7 @@ const PlanetModal = ({ planet, onClose, onDelete }) => {
             ) : (
               <button
                 className="favorite-button"
-                onClick={handleAddToFavourites} // Добавяне към любими
+                onClick={handleAddToFavourites}
               >
                 Add to Favorites
               </button>
