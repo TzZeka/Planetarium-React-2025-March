@@ -7,6 +7,7 @@ import * as Yup from "yup";
 
 import { useNavigate } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
+import "../../styles/LoginRegisterForm.css"
 
 
 
