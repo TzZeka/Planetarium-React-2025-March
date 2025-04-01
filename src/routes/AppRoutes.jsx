@@ -15,6 +15,7 @@ import Planets from "../pages/Planets/planets";
 import FavouritesList from './../components/Favourites/FavouritesList';
 import NotFound404 from "../components/NotFound404/NotFound";
 import PublicRoute from "./PublicRoute";
+import MyPlanetsPage from "../components/Profile/MyPlanets";
 
 const AppRoutes = () => {
   return (
@@ -57,6 +58,8 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+      <Route path="/my-planets" 
+      element={<MyPlanetsPage/>} />
     </Routes>
   );
 };
