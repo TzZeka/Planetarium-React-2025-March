@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { deleteItem, updateItem } from "../utils/api";
 import { addToFavourites } from "../components/Favourites/favouritesService";
@@ -45,6 +45,14 @@ const PlanetModal = ({ planet, onClose }) => {
       toastError("Error updating planet:", error.message);
     }
   };
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden"; // Спиране на скролирането
+
+    return () => {
+      document.body.style.overflow = "unset"; // Възстановяване на скрола при затваряне
+    };
+  }, []);
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -132,7 +140,7 @@ const PlanetModal = ({ planet, onClose }) => {
               <img src={planet.imageUrl} alt={planet.name} className="planet-image" />
             )}
             <p>Size: {planet.size}</p>
-            <p>Color: {planet.color}</p>
+            <p>type: {planet.type}</p>
             <p>Distance from Sun: {planet.distance} million km</p>
             <p>{planet.description}</p>
             {isAuthor ? (
