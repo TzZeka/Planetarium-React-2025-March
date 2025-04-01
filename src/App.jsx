@@ -9,21 +9,29 @@ import { AuthProvider } from "./contexts/AuthContext";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 
-
 function App() {
   return (
-     <AuthProvider> 
-        <div className="App">
-            <ToastContainer/>
-            <StarryBackground />
-          <ErrorBoundary>
-              <Header />
-              <AppRoutes />
-          </ErrorBoundary>
-            <Footer/>         
-        </div>
-    </AuthProvider> 
-   
+    
+    <AuthProvider>
+      <div className="App page-wrapper">
+
+        <ToastContainer />
+        <StarryBackground />
+
+        <ErrorBoundary>
+
+          <Header />
+
+          <main className="main-content">
+            <AppRoutes />
+          </main>
+
+        </ErrorBoundary>
+
+        <Footer />
+
+      </div>
+    </AuthProvider>
   );
 }
 
