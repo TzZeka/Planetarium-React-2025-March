@@ -91,7 +91,6 @@ const ProfilePage = () => {
           <h1>Welcome, {username}</h1>
         </div>
       </div>
-
       {/* Модал за детайли на профила */}
       {isModalOpen && (
         <ProfileDetailsModal
