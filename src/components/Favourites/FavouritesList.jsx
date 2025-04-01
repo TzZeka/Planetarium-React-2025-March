@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { getFavouritePlanets, removeFromFavourites } from "./favouritesService";
 import "../../Styles/Favourites.css";
+import { useNavigate } from "react-router";
+import { toastError, toastSuccess } from './../../utils/toastNotifications';
 
 const FavouritesCatalogue = () => {
   const [planets, setPlanets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFavourites = async () => {
@@ -12,7 +15,7 @@ const FavouritesCatalogue = () => {
         const favouritePlanets = await getFavouritePlanets();
         setPlanets(favouritePlanets);
       } catch (err) {
-        console.error("Error fetching favourites:", err.message);
+        toastError("Error fetching favourites:", err.message);
       } finally {
         setLoading(false);
       }
@@ -26,10 +29,10 @@ const FavouritesCatalogue = () => {
       await removeFromFavourites(planetId);
       setPlanets((prevPlanets) =>
         prevPlanets.filter((planet) => planet.id !== planetId)
-      ); // Обновява локалния state
-      console.log(`Removed planet with ID: ${planetId}`);
+      );
+      toastSuccess(`Removed planet with ID: ${planetId}`);
     } catch (err) {
-      console.error("Error deleting planet:", err.message);
+      toastError("Error deleting planet:", err.message);
     }
   };
 
@@ -38,7 +41,19 @@ const FavouritesCatalogue = () => {
   }
 
   if (!planets.length) {
-    return <p>No favourite planets yet.</p>;
+    return (
+      <div className="planets-catalogue no-favourites">
+        <h2>Your Favourite Planets</h2>
+        <p className="no-favourites">You haven't added any favourite planets yet.</p>
+        <p className="browse-planets">
+        You can teleport to
+        <button onClick={() => navigate("/planets")} >
+              Browse Planets
+        </button>
+          to add your favourite planets.
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -49,7 +64,11 @@ const FavouritesCatalogue = () => {
           <div key={planet.id} className="planet-card">
             <h3>{planet.name}</h3>
             {planet.imageUrl && (
-              <img src={planet.imageUrl} alt={planet.name} className="planet-image" />
+              <img
+                src={planet.imageUrl}
+                alt={planet.name}
+                className="planet-image"
+              />
             )}
             <p>{planet.description}</p>
             <p>Size: {planet.size}</p>
