@@ -1,13 +1,10 @@
 
-import Globe from "./MainScene";
-
+import { auth } from "../../firebase/firebaseConfig";
+import GalacticIntro from "./HomeScene";
 const Home = () => {
     return (
         <div>
-            <h1 style={{ textAlign: "center", color: "white", marginTop: "20px" }}>
-                Welcome to Planetarium
-            </h1>
-            <Globe />
+            <GalacticIntro />
         </div>
     );
 };
