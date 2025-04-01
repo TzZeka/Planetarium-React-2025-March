@@ -4,8 +4,8 @@ import Home from "../pages/Home/home";
 import About from "../pages/About/about";
 import Contacts from "../pages/Contacts/contacts";
 
-import Create from "../components/CRUD/Create";
-import Edit from "../components/CRUD/Edit";
+import Create from "../services/PlanetService/Create";
+
 
 import LoginForm from "../components/Auth/LoginForm";
 import RegisterForm from "../components/Auth/RegisterForm";
@@ -46,14 +46,6 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <Create />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/edit/:itemId"
-        element={
-          <ProtectedRoute>
-            <Edit />
           </ProtectedRoute>
         }
       />
