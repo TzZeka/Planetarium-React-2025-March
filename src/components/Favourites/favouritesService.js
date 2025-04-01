@@ -34,11 +34,10 @@ export const removeFromFavourites = async (itemId) => {
 
   await updateDoc(userRef, {
     favourites: arrayRemove(itemId),
-  }); // Премахване на планетата
+  });
   console.log("Removed from favourites.");
 };
 
-// Функция за извличане на любимите (само ID-та)
 export const getFavourites = async () => {
   if (!auth.currentUser) throw new Error("User not logged in");
 
