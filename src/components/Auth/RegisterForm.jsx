@@ -48,15 +48,15 @@ const RegisterForm = () => {
         {({ isSubmitting }) => (
           <Form className="auth-form">
             <h2>Register as a Planet Explorer</h2>
-            <label>Galactic Email:</label>
+            <label>Galactic Email:<p className="special-label">Required</p></label>
             <Field type="email" name="email" autoComplete="email" />
             <ErrorMessage name="email" component="div" className="error-message" />
 
-            <label>Create Stellar Password:</label>
+            <label>Create Stellar Password:<p className="special-label">Required</p></label>
             <Field type="password" name="password" autoComplete="new-password" />
             <ErrorMessage name="password" component="div" className="error-message" />
 
-            <label>Confirm Stellar Password:</label>
+            <label>Confirm Stellar Password:<p className="special-label">Required</p></label>
             <Field type="password" name="confirmPassword" autoComplete="new-password" />
             <ErrorMessage name="confirmPassword" component="div" className="error-message" />
 

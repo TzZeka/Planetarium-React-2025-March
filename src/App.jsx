@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import Footer from "./components/Footer/footer";
 import { AuthProvider } from "./contexts/AuthContext";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
+import GlobalSpinner from './components/GlobalSpinner/GlobalSpiner';
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
     
     <AuthProvider>
       <div className="App page-wrapper">
-
+        <GlobalSpinner />
         <ToastContainer />
         <StarryBackground />
 

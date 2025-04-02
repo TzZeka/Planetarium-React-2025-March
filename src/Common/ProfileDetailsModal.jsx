@@ -1,36 +1,38 @@
 import React, { useState } from "react";
 import "../Styles/ProfileDetailsModal.css";
-import { updateProfile } from "firebase/auth";
+import { updateProfile, updateEmail, updatePassword } from "firebase/auth";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const ProfileDetailsModal = ({ user, setUser, closeModal }) => {
+const ProfileDetailsModal = ({ user, closeModal }) => {
   const [newUsername, setNewUsername] = useState(user?.displayName || "");
+  const [newEmail, setNewEmail] = useState(user?.email || "");
   const [newPassword, setNewPassword] = useState("");
   const [profileImage, setProfileImage] = useState(user?.photoURL || "/images/default-profile.png");
-  const [imageFile, setImageFile] = useState(null); // Съхраняване на файла за качване
+  const [imageFile, setImageFile] = useState(null);
 
   const handleSave = async () => {
     try {
-      // Firebase Storage за профилна снимка
-      let photoURL = profileImage; // Запазваме оригиналното URL, ако няма нова снимка
+      let photoURL = profileImage;
+
       if (imageFile) {
         const storage = getStorage();
-        const imageRef = ref(storage, `profile-pictures/${user.uid}`); // Път за съхранение на снимката
+        const imageRef = ref(storage, `profile-pictures/${user.uid}-${Date.now()}`);
         await uploadBytes(imageRef, imageFile);
-        photoURL = await getDownloadURL(imageRef); // Получаване на URL към каченото изображение
+        photoURL = await getDownloadURL(imageRef);
       }
 
-      // Обновяване на профилни данни в Firebase Authentication
       await updateProfile(user, { displayName: newUsername, photoURL });
-      setUser((prev) => ({ ...prev, displayName: newUsername, photoURL }));
+
+      if (newEmail && newEmail !== user.email) {
+        await updateEmail(user, newEmail);
+      }
 
       if (newPassword) {
-        await user.updatePassword(newPassword);
-        alert("Password updated successfully!");
+        await updatePassword(user, newPassword);
       }
 
       alert("Profile details updated successfully!");
-      closeModal(); // Затваряне на модала
+      closeModal();
     } catch (error) {
       alert(`Failed to update profile: ${error.message}`);
     }
@@ -39,9 +41,9 @@ const ProfileDetailsModal = ({ user, setUser, closeModal }) => {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file); // За локално визуализиране на каченото изображение
+      const imageUrl = URL.createObjectURL(file);
       setProfileImage(imageUrl);
-      setImageFile(file); // Съхраняване на файла за качване
+      setImageFile(file);
     }
   };
 
@@ -50,14 +52,12 @@ const ProfileDetailsModal = ({ user, setUser, closeModal }) => {
       <div className="modal">
         <h2>Edit Profile Details</h2>
 
-        {/* Качване на профилна снимка */}
         <label>
           Profile Picture:
           <input type="file" accept="image/*" onChange={handleImageUpload} />
         </label>
         <img src={profileImage} alt="Profile" className="profile-preview" />
 
-        {/* Промяна на username */}
         <label>
           New Username:
           <input
@@ -67,7 +67,15 @@ const ProfileDetailsModal = ({ user, setUser, closeModal }) => {
           />
         </label>
 
-        {/* Промяна на парола */}
+        <label>
+          New Email:
+          <input
+            type="email"
+            value={newEmail}
+            onChange={(e) => setNewEmail(e.target.value)}
+          />
+        </label>
+
         <label>
           New Password:
           <input

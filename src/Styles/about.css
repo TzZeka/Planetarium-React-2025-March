@@ -8,7 +8,6 @@
   overflow: hidden; 
 }
 
-
 .university-logo {
   position: absolute;
   top: 20px;
@@ -16,7 +15,6 @@
   width: 120px;
   height: auto;
 }
-
 
 .about-title {
   position: absolute;
@@ -46,7 +44,6 @@
   transform: scale(1.1);
 }
 
-
 .about-content {
   margin-top: 120px; 
   display: flex;
@@ -57,7 +54,6 @@
   margin-right: auto;
 }
 
-
 .about-article {
   background: rgba(0, 255, 255, 0.3); 
   border: 1px solid rgba(0, 255, 255, 0.3); 
@@ -65,15 +61,12 @@
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
   opacity: 0;
-
-  
   transform: translateX(100%); 
   animation: slide-in 1.5s ease-out forwards; 
 }
+
 .about-article:hover {
   box-shadow: 0 5px 20px rgba(0, 255, 255, 0.5);
-  
-
 }
 
 .about-article h3 {
@@ -83,7 +76,7 @@
   font-size: 1.6rem;
 }
 
-/* Анимация за движение от дясно наляво */
+
 @keyframes slide-in {
   0% {
     opacity: 0;
@@ -95,7 +88,7 @@
   }
 }
 
-/* Добавяне на анимационни закъснения за артикълите */
+
 .about-article:nth-child(1) {
   animation-delay: 0.3s;
 }
@@ -106,4 +99,44 @@
 
 .about-article:nth-child(3) {
   animation-delay: 0.9s;
+}
+
+
+@media (max-width: 600px) {
+  .about-container {
+    padding: 10px;
+  }
+
+  .university-logo {
+    top: 10px;
+    left: 10px;
+    width: 80px;
+  }
+
+  .about-title {
+    top: 10px;
+    left: 100px; 
+    font-size: 1.8rem;
+  }
+
+  .contact-button {
+    top: 10px;
+    right: 10px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .about-content {
+    margin-top: 80px;
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .about-article {
+    padding: 15px;
+  }
+
+  .about-article h3 {
+    font-size: 1.4rem;
+  }
 }

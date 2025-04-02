@@ -1,85 +1,83 @@
 .footer {
-    background: linear-gradient(to right, #1b1d29, #272a40);
-    color: #00ffcc;
-    font-family: "Orbitron", sans-serif;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 -5px 15px rgba(0, 255, 255, 0.5);
-    bottom: 0;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .footer-section {
-    margin: 20px 0;
-  
-  }
-  
-  .softuni-logo {
-    position: absolute; 
-    right: 20px; 
-    top: 50%; 
-    transform: translateY(-50%);
-    text-align: center;
-  }
-  
-  .softuni-logo h3 {
-    color: #00ffff;
-    font-size: 1.8em;
-    margin-bottom: 10px;
-  }
-  
-  .softuni-link {
-    display: inline-block;
-    margin-top: 10px;
-  }
-  
-  .softuni-icon {
-    width: 80px;
-    height: auto;
-    transition: transform 0.3s, filter 0.3s;
-  }
-  
-  .softuni-icon:hover {
-    transform: scale(1.2);
-  }
-  
-  h3 {
-    color: #00ffff;
-    margin-bottom: 15px;
-    font-size: 1.5em;
-  }
-  
-  .social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-  }
-  
-  .icon-link {
-    color: #00ffcc;
-    font-size: 1.8em;
-    transition: color 0.3s, transform 0.3s;
-  }
-  
-  .icon-link:hover {
-    color: #ff9500;
-    transform: scale(1.2);
-  }
-  
-  .contact-info a {
-    color: #00ffff;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  
-  .contact-info a:hover {
-    color: #ff9500;
-  }
-  
-  .credits {
-    font-size: 0.8em;
-    color: #00aaaa;
-    margin-top: 20px;
-  }
-  
+  background: linear-gradient(to right, #1b1d29, #272a40);
+  color: #00ffcc;
+  font-family: "Orbitron", sans-serif;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 -5px 15px rgba(0, 255, 255, 0.5);
+  bottom: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-section {
+  margin: 20px 0;
+}
+
+.softuni-logo {
+  position: absolute; 
+  right: 20px; 
+  top: 50%; 
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+.softuni-logo h3 {
+  color: #00ffff;
+  font-size: 1.8em;
+  margin-bottom: 10px;
+}
+
+.softuni-link {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.softuni-icon {
+  width: 80px;
+  height: auto;
+  transition: transform 0.3s, filter 0.3s;
+}
+
+.softuni-icon:hover {
+  transform: scale(1.2);
+}
+
+h3 {
+  color: #00ffff;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.icon-link {
+  color: #00ffcc;
+  font-size: 1.8em;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.icon-link:hover {
+  color: #ff9500;
+  transform: scale(1.2);
+}
+
+.contact-info a {
+  color: #00ffff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.contact-info a:hover {
+  color: #ff9500;
+}
+
+.credits {
+  font-size: 0.8em;
+  color: #00aaaa;
+  margin-top: 20px;
+}

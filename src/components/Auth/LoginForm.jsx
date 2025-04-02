@@ -53,11 +53,11 @@ const LoginForm = () => {
         {({ isSubmitting }) => (
           <Form className="auth-form">
             <h2>Sign in to Spaceport</h2>
-            <label>Cosmic Email:</label>
+            <label>Cosmic Email:<p className="special-label">Required</p></label>
             <Field type="email" name="email" autoComplete="email" />
             <ErrorMessage name="email" component="div" className="error-message" />
 
-            <label>Galactic Password:</label>
+            <label>Galactic Password:<p className="special-label">Required</p></label>
             <Field type="password" name="password" autoComplete="current-password" />
             <ErrorMessage name="password" component="div" className="error-message" />
 

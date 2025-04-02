@@ -1,5 +1,3 @@
-
-import { auth } from "../../firebase/firebaseConfig";
 import GalacticIntro from "./HomeScene";
 const Home = () => {
     return (

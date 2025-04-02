@@ -17,9 +17,16 @@
     text-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
   }
   .create-form label {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-size: 1.12rem;
     margin: 10px 0;
+  }
+  .create-form .special-label{
+    color: greenyellow;
+    text-transform: uppercase;
+    font-size: 0.7rem;
   }
   .create-form input{
     width: 96%;

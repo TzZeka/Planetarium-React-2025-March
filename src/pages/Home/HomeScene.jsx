@@ -148,14 +148,12 @@ const GalacticIntro = () => {
           transform: "translate(-50%, -50%)",
           opacity: 0,
           textAlign: "center",
-          color: "white",
           fontFamily: "'Orbitron', sans-serif",
           fontSize: "24px",
           transition: "opacity 0.5s ease",
           colorAdjust: "exact",
           color: " rgba(2, 207, 222, 0.97)",
-          fontSize: "24px",
-          transition: "opacity 0.5s ease",
+          
         }}
       >
         <h1>Welcome to the Universe<br />of Planetarium</h1>

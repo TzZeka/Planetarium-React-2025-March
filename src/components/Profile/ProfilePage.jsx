@@ -1,97 +1,171 @@
-
-import { toastError, toastSuccess } from "../../utils/toastNotifications";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
-
-import ProfileDetailsModal from "../../Common/ProfileDetailsModal";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import "../../Styles/ProfilePage.css";
+import ProfileDetailsModal from "../../common/ProfileDetailsModal";
+import { db } from "../../firebase/firebaseConfig";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { toastError, toastSuccess } from "../../utils/toastNotifications";
+import { ProfileHeader } from "./Profileheader";
+import { Achievements } from "./Achievments";
+import { Statistics } from "./Statistic";
+import { SocialFeed } from "./SocialFeed";
+import { Settings } from "./Setings";
+import { Link } from "react-router";
+import "../../styles/ProfilePage.css";
 
 const ProfilePage = () => {
-  const { user, logout } = useAuth(); 
-  const [username, setUsername] = useState("");
-  const [lastLogin, setLastLogin] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const { user, logout } = useAuth();
+  const [username, setUsername] = useState("Guest");
+  const [lastLogin, setLastLogin] = useState("N/A");
+  const [theme, setTheme] = useState("light");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [planets, setPlanets] = useState([]);
+  const [achievements, setAchievements] = useState([]);
 
+  
   useEffect(() => {
     if (user) {
-      // Ако user съществува, извличаме потребителското име от email-а
       const emailPrefix = user.email ? user.email.split("@")[0] : "Unknown";
       setUsername(emailPrefix);
-
-      
       const loginTime = user.metadata?.lastSignInTime
         ? new Date(user.metadata.lastSignInTime).toLocaleString()
         : "Unknown";
       setLastLogin(loginTime);
-    } else {
-      // Ако няма логнат потребител
-      setUsername("Guest");
-      setLastLogin("N/A");
     }
   }, [user]);
+
+  
+  useEffect(() => {
+    if (user) {
+      const q = query(
+        collection(db, "planets"),
+        where("ownerId", "==", user.uid)
+      );
+      const unsubscribe = onSnapshot(
+        q,
+        (snapshot) => {
+          const fetchedPlanets = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data()
+          }));
+          setPlanets(fetchedPlanets);
+        },
+        (error) => {
+          toastError("Failed to load planets: " + error.message);
+          console.error("Error loading planets:", error);
+        }
+      );
+      return () => unsubscribe();
+    }
+  }, [user]);
+
+  
+  useEffect(() => {
+    const planetCount = planets.length;
+    const newAchievements = [];
+    
+    if (planetCount >= 1) {
+      newAchievements.push({
+        id: "first",
+        title: "First Planet Created",
+        description: "Congratulations on creating your first planet!",
+        icon: "🌍"
+      });
+    }
+    if (planetCount >= 5) {
+      newAchievements.push({
+        id: "cosmic-creator",
+        title: "Cosmic Creator",
+        description: "You've created 5 planets. The universe is expanding!",
+        icon: "🚀"
+      });
+    }
+    if (planetCount >= 10) {
+      newAchievements.push({
+        id: "galactic-architect",
+        title: "Galactic Architect",
+        description: "10 planets and counting! You're building a galaxy.",
+        icon: "🪐"
+      });
+    }
+    
+    
+    const diffAchievements = newAchievements.filter(
+      (ach) => !achievements.some((a) => a.id === ach.id)
+    );
+    diffAchievements.forEach((ach) => {
+      toastSuccess(`Achievement Unlocked: ${ach.title}`);
+    });
+    
+    setAchievements(newAchievements);
+    
+  }, [planets]);
+
+  const socialFeedData = [
+    { id: 1, user: "Ivan", text: "Your universe is inspiring!", time: "5 mins ago" },
+    { id: 2, user: "Maria", text: "Loved your latest planet creation!", time: "15 mins ago" },
+    { id: 3, user: "Georgi", text: "Keep exploring the cosmos!", time: "1 hr ago" },
+  ];
+
+  const toggleTheme = () => setTheme((prev) => (prev === "light" ? "dark" : "light"));
 
   const handleLogout = async () => {
     try {
       await logout();
-      toastSuccess("You have logged out successfully!");
+      toastSuccess("Logged out successfully!");
     } catch (error) {
-      toastError(`Failed to log out: ${error.message}`);
+      toastError("Logout failed: " + error.message);
     }
   };
 
-  const handleProfileDetails = () => {
-    setIsModalOpen(true);
-  };
+  const openSettings = () => setIsModalOpen(true);
+
+  if (!user) {
+    return (
+      <div className="profile-page-container">
+        <p>Please log in to view your profile.</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="profile-container">
-      {/* Ляв панел (Sidebar) */}
-      <div className="profile-sidebar">
-        {/* Профилна снимка */}
-        <div className="profile-picture">
-          <img
-            src="/images/default-picture.avif"
-            alt="Profile"
-            className="profile-image"
-          />
-        </div>
+    <div className={`profile-page theme-${theme}`}>
+      <ProfileHeader
+        username={username}
+        email={user?.email || "Unknown"}
+        lastLogin={lastLogin}
+        theme={theme}
+        onToggleTheme={toggleTheme}
+        avatarSrc="/images/default-picture.avif"
+      />
 
-        {/* Потребителска информация */}
-        <h2 className="profile-username">{username}</h2>
-        <p>
-          <strong>Email:</strong> {user?.email || "Unknown"}
-        </p>
-        <p>
-          <strong>Last Login:</strong> {lastLogin}
-        </p>
+      
+      <Achievements achievements={achievements} />
 
-        {/* Линк към любими */}
-        <Link to="/favourites" className="nav-link favorites-link">
-          <FontAwesomeIcon icon={faHeart} className="heart-icon" /> Favorites
+      
+      <Statistics planetCount={planets.length} />
+
+      
+      <SocialFeed feedItems={socialFeedData} />
+
+      
+      <Settings onOpenSettings={openSettings} />
+
+      
+      <div className="nav-buttons">
+        <Link to="/favourites" className="nav-button">
+          Favourites
         </Link>
+        <Link to="/my-planets" className="nav-button">
+          My Planets
+        </Link>
+      </div>
 
-        {/* Бутон за детайли */}
-        <button onClick={handleProfileDetails} className="details-button">
-          Profile Details
-        </button>
-
-        {/* Logout бутон */}
+      <div className="action-buttons">
         <button onClick={handleLogout} className="logout-button">
           Logout
         </button>
       </div>
 
-      {/* Дясна част на страницата */}
-      <div className="profile-main">
-        <div className="profile-header">
-          <h1>Welcome, {username}</h1>
-        </div>
-      </div>
-      {/* Модал за детайли на профила */}
       {isModalOpen && (
         <ProfileDetailsModal
           username={username}

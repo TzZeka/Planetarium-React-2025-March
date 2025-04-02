@@ -3,10 +3,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
   min-height: 100vh;
   padding: 20px;
-  background: radial-gradient(circle, #1e1e2e, #0c0c1f);
+  background: linear-gradient(135deg, #1b1d29, #272a40);
   font-family: 'Orbitron', sans-serif;
   color: #00ffcc;
   overflow: hidden; 
@@ -72,9 +71,12 @@
 }
 
 .contact-form {
+  position: relative;
   flex: 1;
+  right: 5%;
   padding: 20px;
   max-width: 500px;
+  height: 550px;
   background: rgba(20, 20, 30, 0.8);
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
@@ -83,22 +85,25 @@
 
 .form-title {
   font-size: 1.8rem;
-  color: #00ffcc;
+  color: #00ffff;
   text-transform: uppercase;
   margin-bottom: 20px;
   text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
 }
 
-/* Form input styles */
 .form-group {
   margin-bottom: 20px;
 }
 
 label {
   font-size: 1rem;
-  color: #00ffff;
+  color: #bbd4ff;
   display: block;
   margin-bottom: 5px;
+}
+textarea{
+  max-width: 460px;
+  max-height: 130px;
 }
 
 input, textarea {
@@ -119,14 +124,16 @@ input:focus, textarea:focus {
   border-color: #00ffcc;
 }
 
-/* Text glow animation */
+
 input::placeholder, textarea::placeholder {
   color: #88cccc;
   font-style: italic;
 }
 
 .submit-btn {
-  width: 100%;
+  position: relative;
+  left: 10%;
+  width: 70%;
   padding: 12px;
   background: linear-gradient(90deg, #00ffff, #007777);
   border: none;
