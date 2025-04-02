@@ -1,6 +1,8 @@
 
 ## 🌌 **Project Name: Planetarium ** 🚀
+## **You can view the project on [Planetarium]( https://planetarium-react-2025.web.app).
 
+## 📖 
 ### **Installation**
 
 Follow these steps to run the project locally:
